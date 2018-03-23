@@ -17,7 +17,7 @@ from django.db.backends.dummy.features import DummyDatabaseFeatures
 
 from influxdb import InfluxDBClient
 
-from backends.influddbAPI2 import dbapi2 as Database
+from influddbAPI2 import dbapi2 as Database
 from django.utils import timezone
 from django.utils.dateparse import parse_date, parse_datetime, parse_time
 import datetime
@@ -123,7 +123,7 @@ class CursorWrapper:
                 else:
                     args2 += (arg,)
             query = query % args2
-        return query.replace("datos.", "")
+        return query
 
     def check_aggregations(self,query):
         select = 'SELECT '

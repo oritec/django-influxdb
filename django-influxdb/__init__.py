@@ -1,6 +1,7 @@
 from django.db.models.lookups import Range
 from django.db.models.fields import Field
 from django.db.models import Lookup
+from django.db.models.expressions import Col
 
 class InfluxDB(Range):
     #def as_sql(self,compiler, connection):
@@ -22,3 +23,9 @@ class NotEqual(Lookup):
 
 Field.register_lookup(InfluxDB)
 Field.register_lookup(NotEqual)
+
+def col_as_influxdb(self, compiler, connection):
+    qn = compiler.quote_name_unless_alias
+    return "%s" % (qn(self.target.column)), []
+
+Col.as_influxdata = col_as_influxdb
